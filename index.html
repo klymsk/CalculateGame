@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel = "stylesheet" href = "styles.css">
+</head>
+<body>
+    <main>
+        <article>
+            <h1>Обчисліть</h1>
+
+            <section class = "question">
+                <div class = "math">
+                    <!-- Тут буде згенерований вираз -->
+                     <p><span id = "num1"></span><span id = "op1">+</span><span id = "num2">56</span><span id = "op2">*</span><span id = "num3">2</span></p>
+                </div>
+
+                <p class = "equal">=</p>
+
+                <div class = "answer">
+                    <input type = "number" placeholder = "answ" id = "answer">
+                </div>
+            </section>
+
+            <button class = "checkAnswer" id = "checkAnswer">Перевірити</button>
+        </article>
+    </main>
+
+    <div class = "timer">
+        <!-- Таймер -->
+         <p id = "timerTxt">Час: 30 сек</p>
+    </div>
+
+    <div id="results">
+        <p id="questionCount">Всього питань: 0</p>
+        <p id="correctCount">Правильних відповідей: 0</p>
+    </div>
+</body>
+<script src = "script.js"></script>
+</html>

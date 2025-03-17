@@ -1,0 +1,119 @@
+* {
+    margin: 0rem;
+    padding: 0rem;
+}
+
+html {
+    height: 100%;
+}
+
+:root {
+    --font-family: "Unbounded";
+    --font-weight-bold: 800;
+    --font-weight-regular: 400;
+    --green-color: #A5B68D;
+    --dark-green-color: #859471;
+    --yellow-color: #EDE8DC;
+    --gray-color: #353535;
+}
+
+body {
+    background-color: var(--green-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; 
+    align-items: center; 
+    height: 100%;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+    margin-top: 10rem;
+}
+
+article {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    gap: 1rem;
+}
+
+article h1 {
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-bold);
+    font-size: 1rem;
+    color: var(--yellow-color);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.question {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.math {
+    padding: 1rem 5rem;
+    background-color: var(--yellow-color);
+    border-radius: 20px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.math p {
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-bold);
+    font-size: 1.5rem;
+    color: var(--gray-color);
+}
+
+.equal {
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-bold);
+    font-size: 1.5rem;
+    color: var(--yellow-color);
+    text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.answer {
+    display: flex;
+}
+
+.answer input {
+    background-color: var(--yellow-color);
+    padding: 1rem 3rem;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-bold);
+    font-size: 1.5rem;
+    color: var(--gray-color);
+}
+
+.checkAnswer {
+    background-color: var(--dark-green-color);
+    padding: 1rem 0rem;
+    border-radius: 20px;
+    border: none;
+    width: 100%;
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-bold);
+    font-size: 1.5rem;
+    color: var(--yellow-color);
+    cursor: pointer;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.timer p {
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-bold);
+    font-size: 1rem;
+    color: var(--yellow-color);
+}
