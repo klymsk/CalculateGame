@@ -79,7 +79,7 @@ article h1 {
 
 @media (max-width: 768px) {
     .math {
-        padding: 1rem 3rem;
+        padding: 1rem 2.5rem;
     }
 
     .math p {
@@ -107,7 +107,7 @@ article h1 {
 
 .answer input {
     background-color: var(--yellow-color);
-    padding: 1rem 3rem;
+    padding: 1rem 1rem;
     border-radius: 20px;
     border: none;
     cursor: pointer;
