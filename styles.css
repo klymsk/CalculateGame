@@ -51,6 +51,12 @@ article h1 {
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
+@media (max-width: 768px) {
+    article h1 {
+        font-size: 0.7rem;
+    }
+}
+
 .question {
     display: flex;
     align-items: center;
@@ -71,12 +77,28 @@ article h1 {
     color: var(--gray-color);
 }
 
+@media (max-width: 768px) {
+    .math {
+        padding: 1rem 3rem;
+    }
+
+    .math p {
+        font-size: 1rem;
+    }
+}
+
 .equal {
     font-family: var(--font-family);
     font-weight: var(--font-weight-bold);
     font-size: 1.5rem;
     color: var(--yellow-color);
     text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+    .equal {
+        font-size: 1rem;
+    }
 }
 
 .answer {
@@ -97,6 +119,12 @@ article h1 {
     color: var(--gray-color);
 }
 
+@media (max-width: 768px) {
+    .answer input {
+        font-size: 1rem;
+    }
+}
+
 .checkAnswer {
     background-color: var(--dark-green-color);
     padding: 1rem 0rem;
@@ -111,9 +139,21 @@ article h1 {
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
+@media (max-width: 768px) {
+    .checkAnswer {
+        font-size: 0.8rem;
+    }
+}
+
 .timer p {
     font-family: var(--font-family);
     font-weight: var(--font-weight-bold);
     font-size: 1rem;
     color: var(--yellow-color);
+}
+
+@media (max-width: 768px) {
+    .timer p {
+        font-size: 0.7rem;
+    }
 }
