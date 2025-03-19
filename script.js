@@ -1,7 +1,8 @@
-let timerTotal = 30;
+let timerTotal = 40;
 let answer = true;
 let counterQuestion = 0;
 let counterCorrectAnsw = 0;
+let state = "easy";
 
 function generateNumber() {
     let num1El = document.getElementById("num1");
@@ -11,9 +12,9 @@ function generateNumber() {
     let op1El = document.getElementById("op1");
     let op2El = document.getElementById("op2");
 
-    let num1 = Math.floor(Math.random() * 10) + 1;
-    let num2 = Math.floor(Math.random() * 10) + 1;
-    let num3 = Math.floor(Math.random() * 10) + 1;
+    let num1 = Math.floor(Math.random() * 20) + 1;
+    let num2 = Math.floor(Math.random() * 20) + 1;
+    let num3 = Math.floor(Math.random() * 20) + 1;
 
     let op1 = operatorChoice();
     let op2 = operatorChoice();
@@ -29,14 +30,44 @@ function generateNumber() {
 function operatorChoice() {
     let operator;
     let random = Math.random();
-    if (random < 0.5) {
-        operator = "+";
-    } 
-    else {
-        operator = "-";
-    } 
+
+    if (state === "easy") {
+        if (random < 0.5) {
+            operator = "+";
+        } 
+        else {
+            operator = "-";
+        } 
+    }
+    else if (state === "medium") {
+        if (random < 0.3) {
+            operator = "+";
+        } 
+        else if (random > 0.3 && random < 0.6) {
+            operator = "-";
+        }
+        else {
+            operator = "*";
+        }
+    }
+    else if (state === "hard") {
+        if (random < 0.25) {
+            operator = "+";
+        } 
+        else if (random < 0.5) {
+            operator = "-";
+        }
+        else if (random < 0.75) {
+            operator = "*";
+        }
+        else {
+            operator = "/";  
+        }
+    }
+
     return operator;
 }
+
 
 function calculateQestion(num1, num2, num3, op1, op2) {
     let firstOperation = `${num1} ${op1} ${num2}`;
@@ -82,9 +113,11 @@ function checkAnswer() {
 function updateResults() {
     const questionCount = document.getElementById("questionCount");
     const correctCount = document.getElementById("correctCount");
+    const results = document.getElementById("results");
 
     questionCount.textContent = `Всього питань: ${counterQuestion}`;
     correctCount.textContent = `Правильних відповідей: ${counterCorrectAnsw}`;
+    results.style.visibility = "visible";
 }
 
 function startTimer() {
@@ -102,9 +135,39 @@ function startTimer() {
     }, 1000);
 }
 
-window.onload = function() {
-    startTimer();
-    generateNumber();
-    checkAnswer();
+function choseLevel() {
+    const startPage = document.getElementById("choseLevel");
+
+    const easyLevel = document.getElementById("easy");
+    const mediumLevel = document.getElementById("medium");
+    const hardLevel = document.getElementById("hard");
+
+    easyLevel.addEventListener("click", function() {
+        state = "easy";
+        startPage.style.visibility = "hidden";
+        startTimer();
+        generateNumber();  
+        checkAnswer();
+    });
+
+    mediumLevel.addEventListener("click", function() {
+        state = "medium";
+        startPage.style.visibility = "hidden";
+        startTimer();
+        generateNumber();  
+        checkAnswer();
+    });
+
+    hardLevel.addEventListener("click", function() {
+        state = "hard";
+        startPage.style.visibility = "hidden";
+        startTimer();
+        generateNumber();  
+        checkAnswer();
+    });
 }
+
+
+choseLevel();
+
 
