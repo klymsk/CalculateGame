@@ -3,6 +3,7 @@ let answer = true;
 let counterQuestion = 0;
 let counterCorrectAnsw = 0;
 let state = "easy";
+let bestScore = 0;
 
 function generateNumber() {
     let num1El = document.getElementById("num1");
@@ -16,8 +17,8 @@ function generateNumber() {
     let num2 = Math.floor(Math.random() * 20) + 1;
     let num3 = Math.floor(Math.random() * 20) + 1;
 
-    let op1 = operatorChoice();
-    let op2 = operatorChoice();
+    let op1 = operatorChoice(num1, num2, num3);
+    let op2 = operatorChoice(num1, num2, num3);
 
     num1El.textContent = num1;
     num2El.textContent = num2;
@@ -27,7 +28,7 @@ function generateNumber() {
     op2El.textContent = op2;
 }
 
-function operatorChoice() {
+function operatorChoice(num1, num2, num3) {
     let operator;
     let random = Math.random();
 
@@ -61,7 +62,12 @@ function operatorChoice() {
             operator = "*";
         }
         else {
-            operator = "/";  
+            if (Number.isInteger(num1 / num2 || nu2 / num3)) {
+                operator = "/";  
+            }
+            else {
+                operator = "*";
+            }
         }
     }
 
@@ -97,6 +103,11 @@ function checkAnswer() {
             alert("Правильно!");
             counterQuestion += 1;
             counterCorrectAnsw += 1;
+
+            if (bestScore < counterCorrectAnsw) {
+                bestScore = counterCorrectAnsw;
+                saveResults(); 
+            }
         }
         else {
             alert("Неправильно, відповідь: " + correctAnswer);
@@ -113,10 +124,12 @@ function checkAnswer() {
 function updateResults() {
     const questionCount = document.getElementById("questionCount");
     const correctCount = document.getElementById("correctCount");
+    const bestScore = document.getElementById("bestScore");
     const results = document.getElementById("results");
 
     questionCount.textContent = `Всього питань: ${counterQuestion}`;
     correctCount.textContent = `Правильних відповідей: ${counterCorrectAnsw}`;
+    bestScore.textContent = `Найкращий результат: ${bestScoreSave}`;
     results.style.visibility = "visible";
 }
 
@@ -162,12 +175,19 @@ function choseLevel() {
         state = "hard";
         startPage.style.visibility = "hidden";
         startTimer();
-        generateNumber();  
+        generateNumber(); 
         checkAnswer();
     });
 }
 
+function saveResults() {
+    localStorage.setItem("bestScore", JSON.stringify(bestScore));
+}
+
+const bestScoreSave = JSON.parse(localStorage.getItem("bestScore"))
+
 
 choseLevel();
+
 
 
