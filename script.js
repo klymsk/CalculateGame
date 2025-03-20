@@ -2,6 +2,9 @@ let timerTotal = 30;
 let answer = true;
 let counterQuestion = 0;
 let counterCorrectAnsw = 0;
+let state = "easy";
+let bestScore = 0;
+let timer;
 
 function generateNumber() {
     let num1El = document.getElementById("num1");
@@ -11,12 +14,12 @@ function generateNumber() {
     let op1El = document.getElementById("op1");
     let op2El = document.getElementById("op2");
 
-    let num1 = Math.floor(Math.random() * 10) + 1;
-    let num2 = Math.floor(Math.random() * 10) + 1;
-    let num3 = Math.floor(Math.random() * 10) + 1;
+    let num1 = Math.floor(Math.random() * 20) + 1;
+    let num2 = Math.floor(Math.random() * 20) + 1;
+    let num3 = Math.floor(Math.random() * 20) + 1;
 
-    let op1 = operatorChoice();
-    let op2 = operatorChoice();
+    let op1 = operatorChoice(num1, num2, num3);
+    let op2 = operatorChoice(num1, num2, num3);
 
     num1El.textContent = num1;
     num2El.textContent = num2;
@@ -26,17 +29,52 @@ function generateNumber() {
     op2El.textContent = op2;
 }
 
-function operatorChoice() {
+function operatorChoice(num1, num2, num3) {
     let operator;
     let random = Math.random();
-    if (random < 0.5) {
-        operator = "+";
-    } 
-    else {
-        operator = "-";
-    } 
+
+    if (state === "easy") {
+        if (random < 0.5) {
+            operator = "+";
+        } 
+        else {
+            operator = "-";
+        } 
+    }
+    else if (state === "medium") {
+        if (random < 0.3) {
+            operator = "+";
+        } 
+        else if (random > 0.3 && random < 0.6) {
+            operator = "-";
+        }
+        else {
+            operator = "*";
+        }
+    }
+    else if (state === "hard") {
+        if (random < 0.25) {
+            operator = "+";
+        } 
+        else if (random < 0.5) {
+            operator = "-";
+        }
+        else if (random < 0.75) {
+            operator = "*";
+        }
+        else {
+            if (Number.isInteger(num1 / num2 || num2 / num3)) {
+                operator = "/";  
+            }
+            else {
+                operator = "*";
+            }
+        }
+    }
+
     return operator;
 }
+
 
 function calculateQestion(num1, num2, num3, op1, op2) {
     let firstOperation = `${num1} ${op1} ${num2}`;
@@ -66,6 +104,14 @@ function checkAnswer() {
             alert("Правильно!");
             counterQuestion += 1;
             counterCorrectAnsw += 1;
+
+            if (bestScore < counterCorrectAnsw) {
+                bestScore = counterCorrectAnsw;
+                saveResults(); 
+            }
+            else {
+                return bestScore;
+            }
         }
         else {
             alert("Неправильно, відповідь: " + correctAnswer);
@@ -82,9 +128,13 @@ function checkAnswer() {
 function updateResults() {
     const questionCount = document.getElementById("questionCount");
     const correctCount = document.getElementById("correctCount");
+    const bestScore = document.getElementById("bestScore");
+    const results = document.getElementById("results");
 
     questionCount.textContent = `Всього питань: ${counterQuestion}`;
     correctCount.textContent = `Правильних відповідей: ${counterCorrectAnsw}`;
+    bestScore.textContent = `Найкращий результат: ${bestScoreSave}`;
+    results.style.visibility = "visible";
 }
 
 function startTimer() {
@@ -95,16 +145,103 @@ function startTimer() {
             timerEl.textContent = `Час: ${timerTotal} сек`;
         } else {
             clearInterval(timer);
-            alert("Час вийшов!");
-            generateNumber();
-            updateResults();
+            restartScreen();
         }
     }, 1000);
 }
 
-window.onload = function() {
-    startTimer();
-    generateNumber();
-    checkAnswer();
+function stopTimer() {
+    if (timer) {
+        clearInterval(timer);
+    }
 }
+
+function resetGame() {
+    timerTotal = 30;  
+    counterQuestion = 0;
+    counterCorrectAnsw = 0;
+    state = "easy"; 
+}
+
+function choseLevel() {
+    const startPage = document.getElementById("choseLevel");
+
+    const easyLevel = document.getElementById("easy");
+    const mediumLevel = document.getElementById("medium");
+    const hardLevel = document.getElementById("hard");
+
+    startPage.style.visibility = "visible";
+
+    easyLevel.addEventListener("click", function() {
+        stopTimer();  
+        resetGame(); 
+        state = "easy";
+        startPage.style.visibility = "hidden";
+        startTimer();  
+        generateNumber();  
+        checkAnswer();
+    });
+
+    mediumLevel.addEventListener("click", function() {
+        stopTimer(); 
+        resetGame();  
+        state = "medium";
+        startPage.style.visibility = "hidden";
+        startTimer();  
+        generateNumber();  
+        checkAnswer();
+    });
+
+    hardLevel.addEventListener("click", function() {
+        stopTimer();  
+        resetGame(); 
+        state = "hard";
+        startPage.style.visibility = "hidden";
+        startTimer(); 
+        generateNumber(); 
+        checkAnswer();
+    });
+}
+
+function restartScreen() {
+    const restartPage = document.getElementById("restartScreen");
+    const yesButton = document.getElementById("buttonY");
+    const noButton = document.getElementById("buttonN");
+
+    const results = document.getElementById("results");
+
+    let updateResChecker = false;
+
+    restartPage.style.visibility = "visible";
+
+    if (!updateResChecker) {
+        updateResults();
+        updateResChecker = true;
+    }
+
+    yesButton.addEventListener("click", function() {
+        console.log("ghjhjfgjhfg");
+        restartPage.style.visibility = "hidden";
+        results.style.visibility = "hidden";
+        choseLevel();
+    });
+
+    noButton.addEventListener("click", function() {
+        console.log("ghjhjfgjhfg");
+        restartPage.style.visibility = "hidden";
+        results.style.visibility = "hidden";
+        choseLevel();
+    });
+}
+
+function saveResults() {
+    localStorage.setItem("bestScore", JSON.stringify(bestScore));
+}
+
+const bestScoreSave = JSON.parse(localStorage.getItem("bestScore"))
+
+
+choseLevel();
+
+
 

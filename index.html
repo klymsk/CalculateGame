@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
     <link rel = "stylesheet" href = "styles.css">
 </head>
 <body>
@@ -11,32 +14,60 @@
         <article>
             <h1>Обчисліть</h1>
 
-            <section class = "question">
-                <div class = "math">
-                    <!-- Тут буде згенерований вираз -->
-                     <p><span id = "num1"></span><span id = "op1">+</span><span id = "num2">56</span><span id = "op2">*</span><span id = "num3">2</span></p>
-                </div>
-
-                <p class = "equal">=</p>
-
-                <div class = "answer">
-                    <input type = "number" placeholder = "answ" id = "answer">
-                </div>
+            <section class = "mainSection">
+                <section class = "question">
+                    <div class = "math">
+                        <!-- Тут буде згенерований вираз -->
+                         <p><span id = "num1"></span><span id = "op1">+</span><span id = "num2">56</span><span id = "op2">*</span><span id = "num3">2</span></p>
+                    </div>
+    
+                    <p class = "equal">=</p>
+    
+                    <div class = "answer">
+                        <input type = "number" placeholder = "answ" id = "answer">
+                    </div>
+                </section>
+    
+                <button class = "checkAnswer" id = "checkAnswer">Перевірити</button>
             </section>
-
-            <button class = "checkAnswer" id = "checkAnswer">Перевірити</button>
         </article>
     </main>
 
     <div class = "timer">
         <!-- Таймер -->
-         <p id = "timerTxt">Час: 30 сек</p>
+         <p id = "timerTxt">Час:</p>
     </div>
 
-    <div id="results">
-        <p id="questionCount">Всього питань: 0</p>
-        <p id="correctCount">Правильних відповідей: 0</p>
-    </div>
+    <section class = "choseLevel" id = "choseLevel">
+        <h2>Оберіть рівень складності:</h2>
+
+        <div class = "buttonsLevel">
+            <button id = "easy">легкий</button>
+            <button id = "medium">середній</button>
+            <button id = "hard">важкий</button>
+        </div>
+    </section>
+
+    <section class = "restartScreen" id = "restartScreen">
+        <h2>Час вийшов</h2>
+
+        <section class = "questionRestart">
+            <div class = "mainQuestion">
+                <p>Почати спочатку?</p>
+            </div>
+
+            <div class = "choseButtons">
+                <button id = "buttonY">Так</button>
+                <button id = "buttonN">Ні</button>
+            </div>
+        </section>
+
+        <div class = "resultTable" id="results">
+            <p id="questionCount">Всього питань: <span>0</span></p>
+            <p id="correctCount">Правильних відповідей: <span>0</span></p>
+            <p id = "bestScore">Найкращий результат: <span>0</span></p>
+        </div>
+    </section>
 </body>
 <script src = "script.js"></script>
 </html>
