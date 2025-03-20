@@ -157,7 +157,7 @@ function stopTimer() {
 }
 
 function resetGame() {
-    timerTotal = 3;  
+    timerTotal = 30;  
     counterQuestion = 0;
     counterCorrectAnsw = 0;
     state = "easy"; 
@@ -208,6 +208,8 @@ function restartScreen() {
     const yesButton = document.getElementById("buttonY");
     const noButton = document.getElementById("buttonN");
 
+    const results = document.getElementById("results");
+
     let updateResChecker = false;
 
     restartPage.style.visibility = "visible";
@@ -220,12 +222,14 @@ function restartScreen() {
     yesButton.addEventListener("click", function() {
         console.log("ghjhjfgjhfg");
         restartPage.style.visibility = "hidden";
+        results.style.visibility = "hidden";
         choseLevel();
     });
 
     noButton.addEventListener("click", function() {
         console.log("ghjhjfgjhfg");
         restartPage.style.visibility = "hidden";
+        results.style.visibility = "hidden";
         choseLevel();
     });
 }

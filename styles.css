@@ -284,6 +284,12 @@ article h1 {
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+@media (max-width: 768px) {
+    .restartScreen h2 {
+        font-size: 0.7rem;
+    }
+}
+
 .questionRestart {
     display: flex;
     flex-direction: column;
@@ -304,6 +310,12 @@ article h1 {
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+@media (max-width: 768px) {
+    .questionRestart p {
+        font-size: 1rem;
+    }
+}
+
 .choseButtons {
     display: flex;
     justify-content: center;
@@ -317,6 +329,15 @@ article h1 {
     color: var(--yellow-color);
     width: 10rem;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 768px) {
+    .choseButtons button {
+        display: flex;
+        justify-content: center;
+        width: 8rem;
+        font-size: 1rem;
+    }
 }
 
 .choseButtons button:nth-of-type(1) {
