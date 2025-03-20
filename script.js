@@ -1,9 +1,10 @@
-let timerTotal = 40;
+let timerTotal = 30;
 let answer = true;
 let counterQuestion = 0;
 let counterCorrectAnsw = 0;
 let state = "easy";
 let bestScore = 0;
+let timer;
 
 function generateNumber() {
     let num1El = document.getElementById("num1");
@@ -62,7 +63,7 @@ function operatorChoice(num1, num2, num3) {
             operator = "*";
         }
         else {
-            if (Number.isInteger(num1 / num2 || nu2 / num3)) {
+            if (Number.isInteger(num1 / num2 || num2 / num3)) {
                 operator = "/";  
             }
             else {
@@ -108,6 +109,9 @@ function checkAnswer() {
                 bestScore = counterCorrectAnsw;
                 saveResults(); 
             }
+            else {
+                return bestScore;
+            }
         }
         else {
             alert("Неправильно, відповідь: " + correctAnswer);
@@ -141,11 +145,22 @@ function startTimer() {
             timerEl.textContent = `Час: ${timerTotal} сек`;
         } else {
             clearInterval(timer);
-            alert("Час вийшов!");
-            generateNumber();
-            updateResults();
+            restartScreen();
         }
     }, 1000);
+}
+
+function stopTimer() {
+    if (timer) {
+        clearInterval(timer);
+    }
+}
+
+function resetGame() {
+    timerTotal = 3;  
+    counterQuestion = 0;
+    counterCorrectAnsw = 0;
+    state = "easy"; 
 }
 
 function choseLevel() {
@@ -155,28 +170,63 @@ function choseLevel() {
     const mediumLevel = document.getElementById("medium");
     const hardLevel = document.getElementById("hard");
 
+    startPage.style.visibility = "visible";
+
     easyLevel.addEventListener("click", function() {
+        stopTimer();  
+        resetGame(); 
         state = "easy";
         startPage.style.visibility = "hidden";
-        startTimer();
+        startTimer();  
         generateNumber();  
         checkAnswer();
     });
 
     mediumLevel.addEventListener("click", function() {
+        stopTimer(); 
+        resetGame();  
         state = "medium";
         startPage.style.visibility = "hidden";
-        startTimer();
+        startTimer();  
         generateNumber();  
         checkAnswer();
     });
 
     hardLevel.addEventListener("click", function() {
+        stopTimer();  
+        resetGame(); 
         state = "hard";
         startPage.style.visibility = "hidden";
-        startTimer();
+        startTimer(); 
         generateNumber(); 
         checkAnswer();
+    });
+}
+
+function restartScreen() {
+    const restartPage = document.getElementById("restartScreen");
+    const yesButton = document.getElementById("buttonY");
+    const noButton = document.getElementById("buttonN");
+
+    let updateResChecker = false;
+
+    restartPage.style.visibility = "visible";
+
+    if (!updateResChecker) {
+        updateResults();
+        updateResChecker = true;
+    }
+
+    yesButton.addEventListener("click", function() {
+        console.log("ghjhjfgjhfg");
+        restartPage.style.visibility = "hidden";
+        choseLevel();
+    });
+
+    noButton.addEventListener("click", function() {
+        console.log("ghjhjfgjhfg");
+        restartPage.style.visibility = "hidden";
+        choseLevel();
     });
 }
 
