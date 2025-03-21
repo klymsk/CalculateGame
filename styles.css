@@ -27,12 +27,30 @@ body {
     height: 100%;
 }
 
+header {
+    visibility: visible;
+    display: flex;
+    align-items: center;
+}
+
+header p {
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-bold);
+    font-size: 1rem;
+    color: var(--yellow-color);
+    transition: all 0.3s ease-in-out;
+}
+
+header > p.highlight {
+    font-size: 1.2rem;
+    color: var(--dark-green-color);
+}
+
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 4rem;
-    margin-top: 10rem;
 }
 
 article {

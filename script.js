@@ -87,6 +87,7 @@ function calculateQestion(num1, num2, num3, op1, op2) {
 function checkAnswer() {
     const button = document.getElementById("checkAnswer");
     const inputField = document.getElementById("answer");
+    const headerChecker = document.getElementById("trueFalse");
 
     button.addEventListener("click", function() {
         let num1 = parseInt(document.getElementById("num1").textContent);
@@ -101,9 +102,17 @@ function checkAnswer() {
         let correctAnswer = calculateQestion(num1, num2, num3, op1, op2);
 
         if (correctAnswer === userAnswer) {
-            alert("Правильно!");
+            headerChecker.textContent = "Правильно!";
             counterQuestion += 1;
             counterCorrectAnsw += 1;
+
+            if (counterCorrectAnsw >= 2) {
+                headerChecker.classList.add("highlight");
+
+                setTimeout(function() {
+                    headerChecker.classList.remove("highlight");
+                }, 1000);
+            }
 
             if (bestScore < counterCorrectAnsw) {
                 bestScore = counterCorrectAnsw;
@@ -114,7 +123,7 @@ function checkAnswer() {
             }
         }
         else {
-            alert("Неправильно, відповідь: " + correctAnswer);
+            headerChecker.textContent = "Неправильно, відповідь: " + correctAnswer;
             counterQuestion += 1;
         }
 
@@ -220,14 +229,12 @@ function restartScreen() {
     }
 
     yesButton.addEventListener("click", function() {
-        console.log("ghjhjfgjhfg");
         restartPage.style.visibility = "hidden";
         results.style.visibility = "hidden";
         choseLevel();
     });
 
     noButton.addEventListener("click", function() {
-        console.log("ghjhjfgjhfg");
         restartPage.style.visibility = "hidden";
         results.style.visibility = "hidden";
         choseLevel();
