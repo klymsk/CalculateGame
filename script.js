@@ -106,25 +106,26 @@ function checkAnswer() {
             counterQuestion += 1;
             counterCorrectAnsw += 1;
 
-            if (counterCorrectAnsw >= 2) {
-                headerChecker.classList.add("highlight");
+            headerChecker.classList.add("highlight");
 
-                setTimeout(function() {
-                    headerChecker.classList.remove("highlight");
-                }, 1000);
-            }
+            setTimeout(function() {
+                headerChecker.classList.remove("highlight");
+            }, 1000);
 
             if (bestScore < counterCorrectAnsw) {
                 bestScore = counterCorrectAnsw;
                 saveResults(); 
             }
-            else {
-                return bestScore;
-            }
         }
         else {
             headerChecker.textContent = "Неправильно, відповідь: " + correctAnswer;
             counterQuestion += 1;
+
+            headerChecker.classList.add("highlight");
+
+            setTimeout(function() {
+                headerChecker.classList.remove("highlight");
+            }, 1000);
         }
 
         inputField.value = ""; 
