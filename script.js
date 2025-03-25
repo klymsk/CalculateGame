@@ -3,7 +3,7 @@ let answer = true;
 let counterQuestion = 0;
 let counterCorrectAnsw = 0;
 let state = "easy";
-let bestScore = 0;
+let bestScore = JSON.parse(localStorage.getItem("bestScore")) || 0;
 let timer;
 
 function generateNumber() {
@@ -27,6 +27,10 @@ function generateNumber() {
 
     op1El.textContent = op1;
     op2El.textContent = op2;
+}
+
+function saveResults() {
+    localStorage.setItem("bestScore", JSON.stringify(bestScore));
 }
 
 function operatorChoice(num1, num2, num3) {
@@ -75,7 +79,6 @@ function operatorChoice(num1, num2, num3) {
     return operator;
 }
 
-
 function calculateQestion(num1, num2, num3, op1, op2) {
     let firstOperation = `${num1} ${op1} ${num2}`;
     let secondOperation = `${firstOperation} ${op2} ${num3}`;
@@ -106,9 +109,11 @@ function checkAnswer() {
             counterQuestion += 1;
             counterCorrectAnsw += 1;
 
+            button.classList.add("true");
             headerChecker.classList.add("highlight");
 
             setTimeout(function() {
+                button.classList.remove("true");
                 headerChecker.classList.remove("highlight");
             }, 1000);
 
@@ -121,9 +126,11 @@ function checkAnswer() {
             headerChecker.textContent = "Неправильно, відповідь: " + correctAnswer;
             counterQuestion += 1;
 
+            button.classList.add("false");
             headerChecker.classList.add("highlight");
 
             setTimeout(function() {
+                button.classList.remove("false");
                 headerChecker.classList.remove("highlight");
             }, 1000);
         }
@@ -138,12 +145,12 @@ function checkAnswer() {
 function updateResults() {
     const questionCount = document.getElementById("questionCount");
     const correctCount = document.getElementById("correctCount");
-    const bestScore = document.getElementById("bestScore");
+    const bestScoreEl = document.getElementById("bestScore");
     const results = document.getElementById("results");
 
     questionCount.textContent = `Всього питань: ${counterQuestion}`;
     correctCount.textContent = `Правильних відповідей: ${counterCorrectAnsw}`;
-    bestScore.textContent = `Найкращий результат: ${bestScoreSave}`;
+    bestScoreEl.querySelector("span").textContent = bestScore;
     results.style.visibility = "visible";
 }
 
@@ -241,13 +248,6 @@ function restartScreen() {
         choseLevel();
     });
 }
-
-function saveResults() {
-    localStorage.setItem("bestScore", JSON.stringify(bestScore));
-}
-
-const bestScoreSave = JSON.parse(localStorage.getItem("bestScore"))
-
 
 choseLevel();
 
